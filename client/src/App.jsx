@@ -1,15 +1,18 @@
-import './App.css';
-import { Outlet } from 'react-router-dom';
+import React from 'react';
+import NavBarTop from './components/NavBarTop/NavBarTop';
+import NavBarBottom from './components/NavBarBottom/NavBarBottom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
-import Navbar from './components/Navbar';
-
-function App() {
+const App = () => {
   return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
+    <div>
+      <NavBarTop />
+      <NavBarBottom />
+      <Header />
+      <Footer />
+    </div>
   );
-}
+};
 
 export default App;
