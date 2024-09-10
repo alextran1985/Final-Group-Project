@@ -1,8 +1,34 @@
 import React, { useState } from "react";
 
+import { CREATE_USER } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
+
 const NavBarTop = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+
+  const [registrationFormState, setRegistrationFormState] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [createUser, { error }] = useMutation(CREATE_USER);
+
+  const handleRegistrationChange = (event) => {
+    const { name, value } = event.target;
+    setRegistrationFormState({
+      ...registrationFormState,
+      [name]: value,
+    });
+  };
+
+  const handleRegistrationForm = async (event) => {
+    event.preventDefault();
+    const { data } = await createUser({
+      variables: registrationFormState,
+    });
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -107,26 +133,41 @@ const NavBarTop = () => {
           ) : (
             <div className="form-box register">
               <h2>Registration</h2>
-              <form action="#">
+              <form action="#" onSubmit={handleRegistrationForm}>
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-envelope"></i>
                   </span>
-                  <input type="email" required />
+                  <input
+                    type="email"
+                    name="email"
+                    onChange={handleRegistrationChange}
+                    required
+                  />
                   <label>Email</label>
                 </div>
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-lock"></i>
                   </span>
-                  <input type="password" required />
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={handleRegistrationChange}
+                    required
+                  />
                   <label>Password</label>
                 </div>
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-lock"></i>
                   </span>
-                  <input type="password" required />
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    onChange={handleRegistrationChange}
+                    required
+                  />
                   <label>Confirm Password</label>
                 </div>
                 <div className="remember-forgot">
