@@ -8,8 +8,11 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser: async (parent, { username, email, password }) => {
-      const createdUser = await User.create({ username, email, password });
+    createUser: async (parent, { email, password, confirmPassword }) => {
+      if (password !== confirmPassword) {
+        throw new Error("Passwords do not match");
+      }
+      const createdUser = await User.create({ email, password });
       return createdUser;
     },
   },
