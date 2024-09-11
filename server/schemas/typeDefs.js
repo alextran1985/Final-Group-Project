@@ -14,7 +14,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    createUser(email: String, password: String, confirmPassword: String): Auth
+    createUser(email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Auth
   }
 `;
 

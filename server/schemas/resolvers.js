@@ -9,7 +9,14 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser: async (parent, { email, password, confirmPassword }) => {
+    createUser: async (
+      parent,
+      { email, password, confirmPassword, termsAccepted }
+    ) => {
+      console.log(termsAccepted);
+      if (!termsAccepted) {
+        throw new Error("You must accept the terms of conditions.");
+      }
       if (password !== confirmPassword) {
         throw new Error("Passwords do not match");
       }

@@ -6,6 +6,7 @@ import { useMutation } from "@apollo/client";
 const NavBarTop = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const [registrationFormState, setRegistrationFormState] = useState({
     email: "",
@@ -26,7 +27,7 @@ const NavBarTop = () => {
   const handleRegistrationForm = async (event) => {
     event.preventDefault();
     const { data } = await createUser({
-      variables: registrationFormState,
+      variables: { ...registrationFormState, termsAccepted },
     });
   };
 
@@ -172,10 +173,17 @@ const NavBarTop = () => {
                 </div>
                 <div className="remember-forgot">
                   <label>
-                    <input type="checkbox" /> I agree to the terms & conditions
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(event) =>
+                        setTermsAccepted(event.target.checked)
+                      }
+                    />{" "}
+                    I agree to the terms & conditions
                   </label>
                 </div>
-                <button type="submit" className="btn">
+                <button type="submit" className="btn" disabled={!termsAccepted}>
                   Register
                 </button>
                 <div className="login-register">
