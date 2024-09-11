@@ -11,9 +11,11 @@ export const CREATE_USER = gql`
       password: $password
       confirmPassword: $confirmPassword
     ) {
-      _id
-      email
-      password
+      token
+      user {
+        _id
+        email
+      }
     }
   }
 `;

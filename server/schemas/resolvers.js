@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -13,7 +14,8 @@ const resolvers = {
         throw new Error("Passwords do not match");
       }
       const createdUser = await User.create({ email, password });
-      return createdUser;
+      const token = signToken(createdUser);
+      return { token, user: createdUser };
     },
   },
 };
