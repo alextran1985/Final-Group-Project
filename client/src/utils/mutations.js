@@ -17,3 +17,14 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const SAVE_RECIPE = gql`
+  mutation saveRecipe($title: String, $ingredients: String, $image: String) {
+    saveRecipe(recipeName: $title, ingredients: $ingredients, image: $image) {
+      _id
+      recipeName
+      ingredients
+      image
+    }
+  }
+`
