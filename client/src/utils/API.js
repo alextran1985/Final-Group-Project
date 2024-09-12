@@ -28,7 +28,7 @@ export const loginUser = (userData) => {
   });
 };
 
-// save book data for a logged in user
+// save recipe data for a logged in user
 export const saveRecipes = (recipesData, token) => {
   return fetch('/api/users', {
     method: 'PUT',
@@ -40,7 +40,7 @@ export const saveRecipes = (recipesData, token) => {
   });
 };
 
-// remove saved book data for a logged in user
+// remove saved recipe data for a logged in user
 export const deleteRecipes = (recipesId, token) => {
   return fetch(`/api/users/recipes/${recipesId}`, {
     method: 'DELETE',
