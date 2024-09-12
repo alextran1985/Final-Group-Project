@@ -1,5 +1,5 @@
 const { User } = require("../models");
-const { signToken } = require("../utils/auth");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -26,6 +26,21 @@ const resolvers = {
       const createdUser = await User.create({ email, password });
       const token = signToken(createdUser);
       return { token, user: createdUser };
+    },
+    login: async (_, { email, password }) => {
+      console.log(email);
+      const foundUser = await User.findOne({ email });
+      if (!foundUser) {
+        throw AuthenticationError;
+      }
+      const correctPw = await foundUser.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new Error("User not found");
+      }
+
+      const token = signToken(foundUser);
+      return { token, user: foundUser };
     },
     saveRecipe: async (parent, { recipeName, ingredients, image }, context) => {
       // IF we want to PROTECT This action to only logged in users

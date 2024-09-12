@@ -22,6 +22,18 @@ export const CREATE_USER = gql`
   }
 `;
 
+export const USER_LOGIN = gql`
+  mutation login($email: String, $password: String) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        email
+      }
+    }
+  }
+`;
+
 export const SAVE_RECIPE = gql`
   mutation saveRecipe($title: String, $ingredients: String, $image: String) {
     saveRecipe(recipeName: $title, ingredients: $ingredients, image: $image) {
@@ -31,4 +43,4 @@ export const SAVE_RECIPE = gql`
       image
     }
   }
-`
+`;

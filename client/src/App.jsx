@@ -40,7 +40,7 @@ const App = () => {
       <div>
         <NavBarTop />
         <NavBarBottom />
-        <Outlet />
+        {/* <Outlet /> */}
         <Header />
         <Main />
         <Footer />
