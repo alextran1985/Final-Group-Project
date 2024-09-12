@@ -81,8 +81,8 @@ const NavBarTop = () => {
             </a>
           </div>
 
-          <a href="#" class="srbtn btnLogin-popup" onClick={openModal}>
-            Login | Register <i class="fa-solid fa-right-to-bracket"></i>
+          <a href="#" className="srbtn btnLogin-popup" onClick={openModal}>
+            Login | Register <i className="fa-solid fa-right-to-bracket"></i>
           </a>
         </div>
       </div>
