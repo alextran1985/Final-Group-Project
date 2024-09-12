@@ -1,6 +1,6 @@
 import React from "react";
-import StirFryImage from "../images/stir-fry.jpg"; // Replace with the path to your image
-import "../Styles/Recipe.css"; // Optional: Link to your CSS file for styling
+import StirFryImage from "../assets/slide-3.jpg"; // Replace with the path to your image
+import "../pages/recipes.css"; // Optional: Link to your CSS file for styling
 
 const StirFry = () => {
   const recipe = {

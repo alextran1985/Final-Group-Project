@@ -1,5 +1,5 @@
 import React from "react";
-import KoreanBBQTacoImage from "../images/korean-bbq-tacos.jpg"; // Replace with the path to your image
+import KoreanBBQTacoImage from "../assets/slide-1.jpg"; // Replace with the path to your image
 import "../pages/recipes.css"; // Optional: Link to your CSS file for styling
 
 const KbbqTacos = () => {

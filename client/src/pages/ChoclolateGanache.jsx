@@ -1,6 +1,6 @@
 import React from "react";
 import ChocolateGanacheImage from "../assets/slide-5.jpg"; // Replace with the path to your image
-import "../Styles/Recipe.css"; // Optional: Link to your CSS file for styling
+import "../pages/recipes.css"; // Optional: Link to your CSS file for styling
 
 const ChocolateGanache = () => {
   const recipe = {
