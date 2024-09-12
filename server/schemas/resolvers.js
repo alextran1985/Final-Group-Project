@@ -1,20 +1,16 @@
 const { User } = require("../models");
-const { signToken } = require("../utils/auth");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    users: async () => {
-      const users = await User.find({});
-      return users;
-    },
     getCurrent: async (parent, args, context) => {
-      const user = await User.findOne({ email: args.email})
-      const token = ''
-      return { 
+      const user = await User.findOne({ email: args.email });
+      const token = "";
+      return {
         token,
-        user
-      }
-    }
+        user,
+      };
+    },
   },
   Mutation: {
     createUser: async (
@@ -31,15 +27,30 @@ const resolvers = {
       const token = signToken(createdUser);
       return { token, user: createdUser };
     },
+    login: async (_, { email, password }) => {
+      console.log(email);
+      const foundUser = await User.findOne({ email });
+      if (!foundUser) {
+        throw AuthenticationError;
+      }
+      const correctPw = await foundUser.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new Error("User not found");
+      }
+
+      const token = signToken(foundUser);
+      return { token, user: foundUser };
+    },
     saveRecipe: async (parent, { recipeName, ingredients, image }, context) => {
       // IF we want to PROTECT This action to only logged in users
-      if(context.user) {
+      if (context.user) {
         // we want to create a new Recipe in the Database
         const newRecipe = await Recipe.create(recipeName, ingredients, image);
 
         return newRecipe;
       }
-    }
+    },
   },
 };
 
