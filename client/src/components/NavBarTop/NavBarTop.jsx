@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { CREATE_USER } from "../../utils/mutations";
+import { CREATE_USER, USER_LOGIN } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 import Auth from "../../utils/auth";
@@ -18,6 +18,13 @@ const NavBarTop = () => {
 
   const [createUser, { error }] = useMutation(CREATE_USER);
 
+  const [loginFormState, setLoginFormState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [login, { error: loginError }] = useMutation(USER_LOGIN);
+
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -31,13 +38,29 @@ const NavBarTop = () => {
     });
   };
 
+  const handleLoginFormChange = (event) => {
+    const { name, value } = event.target;
+    setLoginFormState({
+      ...loginFormState,
+      [name]: value,
+    });
+  };
+
   const handleRegistrationForm = async (event) => {
     event.preventDefault();
     const { data } = await createUser({
       variables: { ...registrationFormState, termsAccepted },
     });
-    console.log(data);
     Auth.login(data.createUser.token);
+  };
+
+  const handleLoginForm = async (event) => {
+    event.preventDefault();
+    const { data } = await login({
+      variables: { ...loginFormState },
+    });
+
+    Auth.login(data.login.token);
   };
 
   const openModal = () => {
@@ -110,19 +133,29 @@ const NavBarTop = () => {
           {isLogin ? (
             <div className="form-box login">
               <h2>Login</h2>
-              <form action="#">
+              <form action="#" onSubmit={handleLoginForm}>
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-envelope"></i>
                   </span>
-                  <input type="email" required />
+                  <input
+                    type="email"
+                    name="email"
+                    onChange={handleLoginFormChange}
+                    required
+                  />
                   <label>Email</label>
                 </div>
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-lock"></i>
                   </span>
-                  <input type="password" required />
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={handleLoginFormChange}
+                    required
+                  />
                   <label>Password</label>
                 </div>
                 <div className="remember-forgot">

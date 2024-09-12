@@ -22,6 +22,7 @@ const typeDefs = `
 
   type Mutation {
     createUser(email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Auth
+    login(email: String, password: String): Auth
     saveRecipe(recipeName: String, ingredients: String, image: String): Recipe
   }
 `;
