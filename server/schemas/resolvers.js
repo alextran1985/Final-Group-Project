@@ -13,7 +13,6 @@ const resolvers = {
       parent,
       { email, password, confirmPassword, termsAccepted }
     ) => {
-      console.log(termsAccepted);
       if (!termsAccepted) {
         throw new Error("You must accept the terms of conditions.");
       }

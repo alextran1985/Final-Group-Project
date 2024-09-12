@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { CREATE_USER } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 
+import Auth from "../../utils/auth";
+
 const NavBarTop = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +17,11 @@ const NavBarTop = () => {
   });
 
   const [createUser, { error }] = useMutation(CREATE_USER);
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
   const handleRegistrationChange = (event) => {
     const { name, value } = event.target;
@@ -29,6 +36,8 @@ const NavBarTop = () => {
     const { data } = await createUser({
       variables: { ...registrationFormState, termsAccepted },
     });
+    console.log(data);
+    Auth.login(data.createUser.token);
   };
 
   const openModal = () => {
@@ -82,9 +91,13 @@ const NavBarTop = () => {
             </a>
           </div>
 
-          <a href="#" class="srbtn btnLogin-popup" onClick={openModal}>
-            Login | Register <i class="fa-solid fa-right-to-bracket"></i>
-          </a>
+          {Auth.loggedIn() ? (
+            <button onClick={logout}>Logout</button>
+          ) : (
+            <a href="#" class="srbtn btnLogin-popup" onClick={openModal}>
+              Login | Register <i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+          )}
         </div>
       </div>
 
