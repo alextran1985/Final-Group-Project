@@ -1,6 +1,6 @@
 import React from "react";
-import RoastedChickenImage from "../images/roasted-chicken.jpg"; // Replace with the path to your image
-import "../Styles/Recipe.css"; // Optional: Link to your CSS file for styling
+import RoastedChickenImage from "../assets/slide-2.jpg"; // Replace with the path to your image
+import "../pages/recipes.css"; // Optional: Link to your CSS file for styling
 
 const RoastedChickenRecipe = () => {
   const recipe = {

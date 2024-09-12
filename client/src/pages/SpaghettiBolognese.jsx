@@ -1,6 +1,6 @@
 import React from "react";
-import SpaghettiBologneseImage from "../images/spaghetti-bolognese.jpg"; // Replace with the path to your image
-import "../Styles/Recipe.css"; // Optional: Link to your CSS file for styling
+import SpaghettiBologneseImage from "../assets/slide-4.jpg"; // Replace with the path to your image
+import "../pages/recipes.css"; // Optional: Link to your CSS file for styling
 
 const SpaghettiBolognese = () => {
   const recipe = {
