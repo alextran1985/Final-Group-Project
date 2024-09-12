@@ -7,6 +7,14 @@ const resolvers = {
       const users = await User.find({});
       return users;
     },
+    getCurrent: async (parent, args, context) => {
+      const user = await User.findOne({ email: args.email})
+      const token = ''
+      return { 
+        token,
+        user
+      }
+    }
   },
   Mutation: {
     createUser: async (
@@ -23,6 +31,15 @@ const resolvers = {
       const token = signToken(createdUser);
       return { token, user: createdUser };
     },
+    saveRecipe: async (parent, { recipeName, ingredients, image }, context) => {
+      // IF we want to PROTECT This action to only logged in users
+      if(context.user) {
+        // we want to create a new Recipe in the Database
+        const newRecipe = await Recipe.create(recipeName, ingredients, image);
+
+        return newRecipe;
+      }
+    }
   },
 };
 

@@ -13,6 +13,7 @@ import {
 } from "@apollo/client";
 
 import { setContext } from "@apollo/client/link/context";
+import { Outlet } from "react-router-dom";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -39,6 +40,7 @@ const App = () => {
       <div>
         <NavBarTop />
         <NavBarBottom />
+        <Outlet />
         <Header />
         <Main />
         <Footer />
