@@ -5,15 +5,19 @@ export const CREATE_USER = gql`
     $email: String
     $password: String
     $confirmPassword: String
+    $termsAccepted: Boolean
   ) {
     createUser(
       email: $email
       password: $password
       confirmPassword: $confirmPassword
+      termsAccepted: $termsAccepted
     ) {
-      _id
-      email
-      password
+      token
+      user {
+        _id
+        email
+      }
     }
   }
 `;

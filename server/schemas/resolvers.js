@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -8,12 +9,19 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser: async (parent, { email, password, confirmPassword }) => {
+    createUser: async (
+      parent,
+      { email, password, confirmPassword, termsAccepted }
+    ) => {
+      if (!termsAccepted) {
+        throw new Error("You must accept the terms of conditions.");
+      }
       if (password !== confirmPassword) {
         throw new Error("Passwords do not match");
       }
       const createdUser = await User.create({ email, password });
-      return createdUser;
+      const token = signToken(createdUser);
+      return { token, user: createdUser };
     },
   },
 };

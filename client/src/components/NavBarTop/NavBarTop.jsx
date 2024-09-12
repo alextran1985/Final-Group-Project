@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import { CREATE_USER } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 
+import Auth from "../../utils/auth";
+
 const NavBarTop = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const [registrationFormState, setRegistrationFormState] = useState({
     email: "",
@@ -14,6 +17,11 @@ const NavBarTop = () => {
   });
 
   const [createUser, { error }] = useMutation(CREATE_USER);
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
   const handleRegistrationChange = (event) => {
     const { name, value } = event.target;
@@ -26,8 +34,10 @@ const NavBarTop = () => {
   const handleRegistrationForm = async (event) => {
     event.preventDefault();
     const { data } = await createUser({
-      variables: registrationFormState,
+      variables: { ...registrationFormState, termsAccepted },
     });
+    console.log(data);
+    Auth.login(data.createUser.token);
   };
 
   const openModal = () => {
@@ -81,9 +91,13 @@ const NavBarTop = () => {
             </a>
           </div>
 
-          <a href="#" className="srbtn btnLogin-popup" onClick={openModal}>
-            Login | Register <i className="fa-solid fa-right-to-bracket"></i>
-          </a>
+          {Auth.loggedIn() ? (
+            <button onClick={logout}>Logout</button>
+          ) : (
+            <a href="#" class="srbtn btnLogin-popup" onClick={openModal}>
+              Login | Register <i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+          )}
         </div>
       </div>
 
@@ -172,10 +186,17 @@ const NavBarTop = () => {
                 </div>
                 <div className="remember-forgot">
                   <label>
-                    <input type="checkbox" /> I agree to the terms & conditions
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={(event) =>
+                        setTermsAccepted(event.target.checked)
+                      }
+                    />{" "}
+                    I agree to the terms & conditions
                   </label>
                 </div>
-                <button type="submit" className="btn">
+                <button type="submit" className="btn" disabled={!termsAccepted}>
                   Register
                 </button>
                 <div className="login-register">
