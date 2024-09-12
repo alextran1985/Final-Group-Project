@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const NavBarBottom = () => {
   const [isSearchVisible, setSearchVisible] = useState(false);
@@ -37,9 +38,9 @@ const NavBarBottom = () => {
           <h1>The Cooking Pot</h1>
         </div>
         <ul className="navlist flex" style={{ right: isNavOpen ? '0' : '-100%' }}>
-          <li><a href="/">Home</a></li>
-          <li><a href="/">Recipes</a></li>
-          <li><a href="/">Blogs</a></li>
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/recipes'>Recipes</Link></li>
+          <li><Link to='/profile'>Profile</Link></li>
           <li><a href="/">Videos</a></li>
           <li><a href="/">Help</a></li>
         </ul>

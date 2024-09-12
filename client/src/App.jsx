@@ -3,7 +3,7 @@ import NavBarTop from "./components/NavBarTop/NavBarTop";
 import NavBarBottom from "./components/NavBarBottom/NavBarBottom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
+import { Outlet } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 const client = new ApolloClient({
   uri: "/graphql",
@@ -16,7 +16,7 @@ const App = () => {
       <div>
         <NavBarTop />
         <NavBarBottom />
-        <Header />
+        <Outlet />
         <Footer />
       </div>
     </ApolloProvider>
