@@ -9,15 +9,6 @@ const typeDefs = `
     user: User
   }
 
-  type Query {
-    users: [User]
-  }
-
-  type Auth {
-    token: String
-    user: User
-  }
-
   type Recipe {
     _id: ID
     recipeName: String
