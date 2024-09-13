@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Recipe } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
@@ -28,7 +28,6 @@ const resolvers = {
       return { token, user: createdUser };
     },
     login: async (_, { email, password }) => {
-      console.log(email);
       const foundUser = await User.findOne({ email });
       if (!foundUser) {
         throw AuthenticationError;
@@ -50,6 +49,17 @@ const resolvers = {
 
         return newRecipe;
       }
+    },
+    createRecipe: async (_, { recipeData }, { token, user }) => {
+      if (user) {
+        const recipe = await Recipe.create({
+          ...recipeData,
+          creator: user._id,
+        });
+        const populatedRecipe = await recipe.populate("creator", "email");
+        return populatedRecipe;
+      }
+      throw AuthenticationError;
     },
   },
 };

@@ -11,9 +11,14 @@ const typeDefs = `
 
   type Recipe {
     _id: ID
-    recipeName: String
-    ingredients: String
+    title: String
+    description: String
+    duration: String
+    cost: String
     image: String
+    ingredients: [String]
+    directions: [String]
+    creator: User
   }
 
   type Query {
@@ -24,6 +29,17 @@ const typeDefs = `
     createUser(email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Auth
     login(email: String, password: String): Auth
     saveRecipe(recipeName: String, ingredients: String, image: String): Recipe
+    createRecipe(recipeData: RecipeInput): Recipe
+  }
+
+  input RecipeInput {
+    title: String
+    description: String
+    duration: String
+    cost: String
+    image: String
+    ingredients: [String]
+    directions: [String]
   }
 `;
 
