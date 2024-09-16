@@ -4,12 +4,15 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     getCurrent: async (parent, args, context) => {
-      const user = await User.findOne({ email: args.email });
-      const token = "";
-      return {
-        token,
-        user,
-      };
+      console.log("Hit Server Method...");
+      console.log("Context User: ", context.user)
+
+      if(context.user) {
+        const userData = await User.findById(context.user._id);
+        console.log("Current User: ", userData);
+        return userData;
+      } 
+      throw AuthenticationError;
     },
   },
   Mutation: {
@@ -17,6 +20,7 @@ const resolvers = {
       parent,
       { email, password, confirmPassword, termsAccepted }
     ) => {
+    
       if (!termsAccepted) {
         throw new Error("You must accept the terms of conditions.");
       }
@@ -24,7 +28,9 @@ const resolvers = {
         throw new Error("Passwords do not match");
       }
       const createdUser = await User.create({ email, password });
+      console.log("New User: ", createdUser);
       const token = signToken(createdUser);
+      console.log("Token: ", token);
       return { token, user: createdUser };
     },
     login: async (_, { email, password }) => {

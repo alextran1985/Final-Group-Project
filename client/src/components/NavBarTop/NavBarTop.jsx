@@ -48,6 +48,7 @@ const NavBarTop = () => {
 
   const handleRegistrationForm = async (event) => {
     event.preventDefault();
+    console.log("Sending Data to Server...")
     const { data } = await createUser({
       variables: { ...registrationFormState, termsAccepted },
     });

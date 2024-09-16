@@ -1,10 +1,9 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_CURRENT_USER = gql`
-  query getCurrent($email: String) {
-    getCurrent(email: $email) {
+  query {
+    getCurrent {
       _id
-      username
       email
       recipes {
         _id
@@ -15,11 +14,10 @@ export const QUERY_CURRENT_USER = gql`
     }
   }
 `;
-import { gql } from "@apollo/client";
 
 // # Fetch all recipes
 export const GetAll_Recipes = gql`
-  query GetAllRecipes {
+  query GetAllRecixpes {
     recipes {
       id
       title

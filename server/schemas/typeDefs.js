@@ -2,6 +2,7 @@ const typeDefs = `
   type User {
     _id: ID
     email: String
+    recipes: [Recipe]
   }
 
   type Auth {
@@ -17,7 +18,7 @@ const typeDefs = `
   }
 
   type Query {
-    getCurrent(email: String): Auth
+    getCurrent: User
   }
 
   type Mutation {
