@@ -40,9 +40,7 @@ const App = () => {
       <div>
         <NavBarTop />
         <NavBarBottom />
-        {/* <Outlet /> */}
-        <Header />
-        <Main />
+        <Outlet />
         <Footer />
       </div>
     </ApolloProvider>

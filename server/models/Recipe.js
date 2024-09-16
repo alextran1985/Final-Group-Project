@@ -13,17 +13,14 @@ const recipeSchema = new Schema({
   },
   duration: {
     type: String,
-    required: true,
     trim: true,
   },
   cost: {
     type: String,
-    required: true,
     trim: true,
   },
   image: {
     type: String,
-    required: true,
   },
   ingredients: [
     {
@@ -34,7 +31,6 @@ const recipeSchema = new Schema({
   directions: [
     {
       type: String,
-      required: true,
     },
   ],
   creator: {

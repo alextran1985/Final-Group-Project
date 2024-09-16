@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import Auth from "../../utils/auth";
 
 const NavBarBottom = () => {
   const [isSearchVisible, setSearchVisible] = useState(false);
@@ -44,9 +45,12 @@ const NavBarBottom = () => {
             <Link to="/recipes">Recipes</Link>
           </li>
 
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
+          {Auth.loggedIn() && (
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          )}
+
           <li>
             <a href="/">Videos</a>
           </li>
