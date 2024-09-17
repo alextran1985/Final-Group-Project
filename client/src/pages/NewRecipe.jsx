@@ -13,7 +13,10 @@ function NewRecipe() {
     const [recipe, setRecipe] = useState({
         title: '',
         ingredients: '',
-        image: ''
+        image: '',
+        label: '',
+        directions: '',
+        duration: '',
     })
 
     const [saveRecipe, { error }] = useMutation(SAVE_RECIPE);
