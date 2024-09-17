@@ -13,7 +13,7 @@ const Main = () => {
             },
             rating: 5,
             difficulty: "Beginner",
-            link: "/"
+            link: "/recipes/7"
         },
         {
             title: "Bibimabop",
@@ -25,7 +25,7 @@ const Main = () => {
             },
             rating: 3,
             difficulty: "Intermediate",
-            link: "/"
+            link: "/recipes/3"
         },
         {
             title: "Biryani",
@@ -37,7 +37,7 @@ const Main = () => {
             },
             rating: 3,
             difficulty: "Advanced",
-            link: "/"
+            link: "/recipes/4"
         }
     ];
 
@@ -49,7 +49,7 @@ const Main = () => {
             image: "/src/assets/video-1.jpg",
             time: "15 Mins",
             likes: "60",
-            link: "/",
+            link: "/recipes/5",
             rating: 5,
         },
         {
@@ -58,7 +58,7 @@ const Main = () => {
             image: "/src/assets/video-2.jpg",
             time: "8 Mins",
             likes: "37",
-            link: "/",
+            link: "/recipes/6",
             rating: 3
         },
         {
@@ -67,7 +67,7 @@ const Main = () => {
             image: "/src/assets/video-3.jpg",
             time: "5 Mins",
             likes: "91",
-            link: "/",
+            link: "/recipes/8",
             rating: 3
         }
     ];
@@ -99,7 +99,7 @@ const Main = () => {
             <section className="featuredrecipe container flex">
                 <div className="featuredtitles flex">
                     <div className="titleicon">
-                        <img src="./src/assets/chef.png" alt="Chef Icon" />
+                        <img src="../../src/assets/chef.png" alt="Chef Icon" />
                     </div>
                     <h1>Anyone Can Cook!</h1>
                     <p>Cooking is for everyone! With simple, step-by-step recipes, anyone can unlock their inner chef and create delicious meals with ease. Let's make cooking fun and approachable for all!</p>
@@ -110,7 +110,7 @@ const Main = () => {
                             <div className="fcardimg">
                                 <img src={recipe.image} alt={recipe.title} />
                                 <div className="fauthorname flex">
-                                    <img src="src/assets/user.png" alt="User" />
+                                    <img src="../../src/assets/user.png" alt="User" />
                                     <div className="fauth">
                                         <h5>{recipe.author.name}</h5>
                                         <p>{recipe.author.recipes}</p>
