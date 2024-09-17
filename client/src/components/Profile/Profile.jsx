@@ -9,6 +9,9 @@ function Profile() {
   const recipeFormRef = useRef(null);
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState([]);
+  const [recipeImage, setRecipeImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const fileInputRef = useRef(null);
 
   const handleNewRecipeBtnClick = function () {
     if (!isRecipeFormVisible) {
@@ -51,6 +54,32 @@ function Profile() {
     setSteps(newSteps);
   };
 
+  const handleImageUpload = function (event) {
+    const file = event.target.files[0];
+    setRecipeImage(file);
+
+    // Create a preview of the image
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
+      setImagePreview(previewUrl);
+    }
+  };
+
+  const handleRemoveImage = function () {
+    setRecipeImage(null);
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; // Clear the file input
+    }
+  };
+
+  const handleImageLoad = function () {
+    if (isRecipeFormVisible) {
+      const scrollHeight = recipeFormRef.current.scrollHeight;
+      setRecipeFormHeight(`${scrollHeight}px`);
+    }
+  };
+
   useEffect(
     function () {
       if (isRecipeFormVisible) {
@@ -81,6 +110,48 @@ function Profile() {
             className="create-recipe-form"
             style={{ maxHeight: recipeFormHeight }}
           >
+            {/* Recipe Image Upload */}
+            <div className="image-upload-area">
+              <label
+                htmlFor="recipeImage"
+                className="image-upload-title recipe-input-title"
+              >
+                Recipe Image
+              </label>
+              <input
+                type="file"
+                ref={fileInputRef}
+                name="recipeImage"
+                id="recipeImage"
+                accept="image/*"
+                className="recipe-image-upload recipe-form-input"
+                onChange={handleImageUpload}
+              />
+
+              {/* Display Image Preview */}
+              {imagePreview && (
+                <div className="image-preview-area">
+                  <p>Image Preview:</p>
+                  <img
+                    src={imagePreview}
+                    onLoad={handleImageLoad}
+                    alt="Recipe Preview"
+                    className="recipe-image-preview"
+                    style={{ width: "100%" }}
+                  />
+
+                  {/* Button to Remove Image */}
+                  <button
+                    type="button"
+                    className="remove-image-btn"
+                    onClick={handleRemoveImage}
+                  >
+                    Remove Image
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Recipe Title */}
             <input
               type="text"
