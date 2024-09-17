@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+
 const NavBarBottom = () => {
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [isNavOpen, setNavOpen] = useState(false);
+  const [randomRecipe, setRandomRecipe] = useState(1);
+
+  useEffect(() => {
+    const randomRecipeId = Math.floor(Math.random() * 11) + 1;
+    setRandomRecipe(randomRecipeId);
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +32,7 @@ const NavBarBottom = () => {
   const toggleSearch = () => {
     setSearchVisible(!isSearchVisible);
   };
-
+console.log(randomRecipe);
   return (
     <nav className="mainnav">
       <div className="container flex">
@@ -35,7 +42,7 @@ const NavBarBottom = () => {
         </div>
         <ul className="navlist flex" style={{ right: isNavOpen ? '0' : '-100%' }}>
           <li><Link to='/'>Home</Link></li>
-          <li><Link to='/recipes'>Recipes</Link></li>
+          <li><Link to={`/recipes/${randomRecipe}`}>Recipes</Link></li>
           <li><Link to='/profile'>Profile</Link></li>
           <li><a href="/">Videos</a></li>
           <li><a href="/">Help</a></li>
