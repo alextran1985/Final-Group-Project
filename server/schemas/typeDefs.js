@@ -1,7 +1,9 @@
 const typeDefs = `
   type User {
     _id: ID
+    name: String
     email: String
+    password: String
     recipes: [Recipe]
   }
 
@@ -22,8 +24,9 @@ const typeDefs = `
   }
 
   type Mutation {
-    createUser(email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Auth
-    login(email: String, password: String): Auth
+    createUser(name: String, email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Auth
+    updateUser(name: String, email: String, password: String, confirmPassword: String): User
+    login(name: String, email: String, password: String): Auth
     saveRecipe(recipeName: String, ingredients: String, image: String): Recipe
   }
 `;

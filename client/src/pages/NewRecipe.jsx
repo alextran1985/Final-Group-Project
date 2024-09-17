@@ -51,7 +51,7 @@ function NewRecipe() {
             <input type="text" id='ingredients' name='ingredients' className='' onChange={handleInputChange}/>
             { /*<input type="text" id='ingredients' name='ingredients' className='' onChange={(event) => setIngredients(event.target.value)}/> */} 
             { /* we may need to find a image uploading library */ }
-            <button type="submit">Save Recipe</button>
+            <button type="submit">Share Recipe</button>
         </form>
     </>
   )

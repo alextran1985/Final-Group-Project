@@ -4,6 +4,7 @@ export const QUERY_CURRENT_USER = gql`
   query {
     getCurrent {
       _id
+      name
       email
       recipes {
         _id

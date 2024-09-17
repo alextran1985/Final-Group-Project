@@ -18,7 +18,7 @@ const resolvers = {
   Mutation: {
     createUser: async (
       parent,
-      { email, password, confirmPassword, termsAccepted }
+      { name, email, password, confirmPassword, termsAccepted }
     ) => {
     
       if (!termsAccepted) {
@@ -27,11 +27,20 @@ const resolvers = {
       if (password !== confirmPassword) {
         throw new Error("Passwords do not match");
       }
-      const createdUser = await User.create({ email, password });
+      const createdUser = await User.create({ name, email, password });
       console.log("New User: ", createdUser);
       const token = signToken(createdUser);
       console.log("Token: ", token);
       return { token, user: createdUser };
+    },
+    updateUser: async (parent, { name, email, password, confirmPassword }, context) => {
+      if(!context.user) {
+        throw new Error("User not found");
+      }
+      const updatedUser = await User.findByIdAndUpdate(context.user._id, { name, email, password, confirmPassword });
+      console.log("Updated: ", updatedUser);
+
+      return updatedUser;
     },
     login: async (_, { email, password }) => {
       console.log(email);

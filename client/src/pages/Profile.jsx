@@ -1,4 +1,7 @@
 import React from 'react';
+import RecipesComponent from "../../pages/RecipesComponent";
+
+import { Link, NavLink } from 'react-router-dom';
 import {
   MDBCol,
   MDBContainer,
@@ -29,12 +32,12 @@ export default function Profile() {
           <MDBCol>
             <MDBBreadcrumb className="bg-light rounded-3 p-3 mb-4">
               <MDBBreadcrumbItem>
-                <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
               </MDBBreadcrumbItem>
               <MDBBreadcrumbItem>
-                <a href="#">User</a>
+              <Link to={`/recipes/${randomRecipe}`}>Recipes</Link>
               </MDBBreadcrumbItem>
-              <MDBBreadcrumbItem active>User Recipe</MDBBreadcrumbItem>
+              <MDBBreadcrumbItem active>Profile</MDBBreadcrumbItem>
             </MDBBreadcrumb>
           </MDBCol>
         </MDBRow>
@@ -49,7 +52,7 @@ export default function Profile() {
                   className="rounded-circle"
                   style={{ width: '150px' }}
                   fluid />
-                <p className="text-muted mb-1">Full Stack Developer</p>
+                <p className="text-muted mb-1"></p>
                 <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
                 <div className="d-flex justify-content-center mb-2">
                   <MDBBtn>Follow</MDBBtn>

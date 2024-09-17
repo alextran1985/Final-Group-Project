@@ -11,6 +11,7 @@ const NavBarTop = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   const [registrationFormState, setRegistrationFormState] = useState({
+    name:"",
     email: "",
     password: "",
     confirmPassword: "",
@@ -135,6 +136,7 @@ const NavBarTop = () => {
             <div className="form-box login">
               <h2>Login</h2>
               <form action="#" onSubmit={handleLoginForm}>
+              
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-envelope"></i>
@@ -182,6 +184,18 @@ const NavBarTop = () => {
             <div className="form-box register">
               <h2>Registration</h2>
               <form action="#" onSubmit={handleRegistrationForm}>
+              <div className="input-box">
+                  <span className="icon">
+                    <i className="fa-solid "></i>
+                  </span>
+                  <input
+                    type="text"
+                    name="name"
+                    onChange={handleRegistrationChange}
+                    required
+                  />
+                  <label>Name</label>
+                </div>
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-envelope"></i>
