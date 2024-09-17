@@ -6,7 +6,13 @@ body {
     padding: 20px;
     box-sizing: border-box;
   }
-  
+  ul.navlist.flex {
+    color: black;
+  }
+  .featuredrecipe p {
+    color: black;
+  }
+
   h1, h3 {
     color: #fbc02d; /* Bright accent color */
   }
