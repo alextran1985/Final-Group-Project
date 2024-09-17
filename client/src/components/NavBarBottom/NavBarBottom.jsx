@@ -37,7 +37,7 @@ console.log(randomRecipe);
     <nav className="mainnav">
       <div className="container flex">
         <div className="logo flex">
-          <img src="../../assets/logo.png" alt="Logo" />
+          <img src="../../src/assets/logo.png" alt="Logo" />
           <h1>The Cooking Pot</h1>
         </div>
         <ul className="navlist flex" style={{ right: isNavOpen ? '0' : '-100%' }}>
