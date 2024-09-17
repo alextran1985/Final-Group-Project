@@ -1272,6 +1272,11 @@ footer .container {
 
 /* Profile Page */
 
+.recipe-create-area {
+  max-width: 500px;
+  margin: auto;
+}
+
 .create-recipe-form {
   overflow: hidden;
   transition: max-height 250ms;
@@ -1387,17 +1392,21 @@ footer .container {
   content: "¢";
 }
 
-.ingredient-wrapper,
+.ingredients-area,
 .directions-area {
   margin-bottom: 0.5rem;
 }
 
-.ingredient-wrapper {
+.ingredient-wrapper,
+.direction-wrapper {
   display: flex;
+  margin-bottom: 0.5rem;
 }
 
-.recipe-ingredient {
+.recipe-ingredient,
+.recipe-direction {
   margin-bottom: 0;
+  width: 100%;
 }
 
 .trash-icon {

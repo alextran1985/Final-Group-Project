@@ -8,6 +8,7 @@ function Profile() {
   const [recipeFormHeight, setRecipeFormHeight] = useState("0px");
   const recipeFormRef = useRef(null);
   const [ingredients, setIngredients] = useState([]);
+  const [steps, setSteps] = useState([]);
 
   const handleNewRecipeBtnClick = function () {
     if (!isRecipeFormVisible) {
@@ -30,6 +31,26 @@ function Profile() {
     setIngredients(newIngredients);
   };
 
+  const handleDeleteIngredient = function (index) {
+    const newIngredients = ingredients.filter((_, i) => i !== index);
+    setIngredients(newIngredients);
+  };
+
+  const handleAddStep = function () {
+    setSteps([...steps, ""]);
+  };
+
+  const handleStepChange = function (index, value) {
+    const newSteps = [...steps];
+    newSteps[index] = value;
+    setIngredients(newSteps);
+  };
+
+  const handleDeleteStep = function (index) {
+    const newSteps = steps.filter((_, i) => i !== index);
+    setSteps(newSteps);
+  };
+
   useEffect(
     function () {
       if (isRecipeFormVisible) {
@@ -37,7 +58,7 @@ function Profile() {
         setRecipeFormHeight(`${scrollHeight}px`);
       }
     },
-    [ingredients]
+    [ingredients, steps]
   );
 
   return (
@@ -157,7 +178,10 @@ function Profile() {
                         handleIngredientChange(index, e.target.value)
                       }
                     />
-                    <i className="fa-solid fa-trash-can trash-icon"></i>
+                    <i
+                      className="fa-solid fa-trash-can trash-icon"
+                      onClick={() => handleDeleteIngredient(index)}
+                    ></i>
                   </div>
                 ))}
               </div>
@@ -179,15 +203,29 @@ function Profile() {
                 Directions
               </label>
               <div className="direction-inputs">
-                <input
-                  type="text"
-                  name="recipeDirection1"
-                  id="recipe-direction"
-                  className="recipe-direction recipe-form-input"
-                  placeholder="Step 1"
-                />
+                {steps.map((step, index) => (
+                  <div className="direction-wrapper" key={index}>
+                    <input
+                      type="text"
+                      name={`recipeDirection${index + 1}`}
+                      id="recipe-direction"
+                      className="recipe-direction recipe-form-input"
+                      placeholder={`Step ${index + 1}`}
+                      value={step}
+                      onChange={(e) => handleStepChange(index, e.target.value)}
+                    />
+                    <i
+                      className="fa-solid fa-trash-can trash-icon"
+                      onClick={() => handleDeleteStep(index)}
+                    ></i>
+                  </div>
+                ))}
               </div>
-              <button type="button" className="add-direction-step-btn">
+              <button
+                type="button"
+                className="add-direction-step-btn"
+                onClick={handleAddStep}
+              >
                 Add Step
               </button>
             </div>
