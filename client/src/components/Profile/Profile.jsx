@@ -1,8 +1,45 @@
 import React from "react";
 import "../../index.css";
+import { useState, useRef, useEffect } from "react";
 // import ProfileRecipe from "./ProfileRecipe";s
 
 function Profile() {
+  const [isRecipeFormVisible, setIsRecipeFormVisible] = useState(false);
+  const [recipeFormHeight, setRecipeFormHeight] = useState("0px");
+  const recipeFormRef = useRef(null);
+  const [ingredients, setIngredients] = useState([]);
+
+  const handleNewRecipeBtnClick = function () {
+    if (!isRecipeFormVisible) {
+      const scrollHeight = recipeFormRef.current.scrollHeight;
+      setRecipeFormHeight(`${scrollHeight}px`);
+      setIsRecipeFormVisible(true);
+    } else {
+      setRecipeFormHeight("0px");
+      setIsRecipeFormVisible(false);
+    }
+  };
+
+  const handleAddIngredient = function () {
+    setIngredients([...ingredients, ""]);
+  };
+
+  const handleIngredientChange = function (index, value) {
+    const newIngredients = [...ingredients];
+    newIngredients[index] = value;
+    setIngredients(newIngredients);
+  };
+
+  useEffect(
+    function () {
+      if (isRecipeFormVisible) {
+        const scrollHeight = recipeFormRef.current.scrollHeight;
+        setRecipeFormHeight(`${scrollHeight}px`);
+      }
+    },
+    [ingredients]
+  );
+
   return (
     <section className="profile-section">
       <div className="profile-section-container">
@@ -12,10 +49,17 @@ function Profile() {
           <h2 className="profile-heading">Profile: (User)</h2>
 
           {/* New Recipe Button */}
-          <button className="new-recipe-btn">New Recipe</button>
+          <button className="new-recipe-btn" onClick={handleNewRecipeBtnClick}>
+            New Recipe
+          </button>
 
           {/* Create Recipe Form */}
-          <form action="" className="create-recipe-form">
+          <form
+            ref={recipeFormRef}
+            action=""
+            className="create-recipe-form"
+            style={{ maxHeight: recipeFormHeight }}
+          >
             {/* Recipe Title */}
             <input
               type="text"
@@ -101,15 +145,27 @@ function Profile() {
                 Ingredients
               </label>
               <div className="ingredient-inputs">
-                <input
-                  type="text"
-                  name="recipeIngredient1"
-                  id="recipe-ingredient"
-                  className="recipe-ingredient recipe-form-input"
-                  placeholder="Ingredient 1"
-                />
+                {ingredients.map((ingredient, index) => (
+                  <div className="ingredient-wrapper" key={index}>
+                    <input
+                      type="text"
+                      name={`recipeIngredient${index + 1}`}
+                      className="recipe-ingredient recipe-form-input"
+                      placeholder={`Ingredient ${index + 1}`}
+                      value={ingredient}
+                      onChange={(e) =>
+                        handleIngredientChange(index, e.target.value)
+                      }
+                    />
+                    <i className="fa-solid fa-trash-can trash-icon"></i>
+                  </div>
+                ))}
               </div>
-              <button type="button" className="add-ingredient-btn">
+              <button
+                type="button"
+                className="add-ingredient-btn"
+                onClick={handleAddIngredient}
+              >
                 Add Ingredient
               </button>
             </div>

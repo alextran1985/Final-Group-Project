@@ -1271,6 +1271,12 @@ footer .container {
 }
 
 /* Profile Page */
+
+.create-recipe-form {
+  overflow: hidden;
+  transition: max-height 250ms;
+}
+
 .recipe-form-input {
   padding: 0.5rem;
   font-weight: 600;
@@ -1381,9 +1387,28 @@ footer .container {
   content: "¢";
 }
 
-.ingredients-area,
+.ingredient-wrapper,
 .directions-area {
   margin-bottom: 0.5rem;
+}
+
+.ingredient-wrapper {
+  display: flex;
+}
+
+.recipe-ingredient {
+  margin-bottom: 0;
+}
+
+.trash-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-left: 0.5rem;
+  background-color: #00005a;
+  color: #d7d7d7;
 }
 
 .add-ingredient-btn,
