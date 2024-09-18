@@ -73,7 +73,7 @@ const Header = () => {
       recipeElement.href = recipe.link;
       recipeElement.innerHTML = `
         <img src="${recipe.backgroundImage}" alt="">
-        <div className="hcardinfo">
+        <div class="hcardinfo">
           <span>${recipe.label}</span>
           <h3>${recipe.title}</h3>
         </div>
