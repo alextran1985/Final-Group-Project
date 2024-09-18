@@ -1,9 +1,10 @@
 import React from "react";
 import "../../index.css";
 import { useState, useRef, useEffect } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_RECIPE } from "../../utils/mutations";
-// import ProfileRecipe from "./ProfileRecipe";s
+import { GET_USER_RECIPES } from "../../utils/queries";
+import ProfileRecipes from "./ProfileRecipes";
 
 function Profile() {
   const [isRecipeFormVisible, setIsRecipeFormVisible] = useState(false);
@@ -23,6 +24,11 @@ function Profile() {
   });
 
   const [createRecipe, { error }] = useMutation(CREATE_RECIPE);
+  const {
+    data: getUserRecipesData,
+    loading,
+    error: getRecipesError,
+  } = useQuery(GET_USER_RECIPES);
 
   const handleNewRecipeBtnClick = function () {
     if (!isRecipeFormVisible) {
@@ -108,9 +114,6 @@ function Profile() {
 
   const handleCreateRecipe = async function (event) {
     event.preventDefault();
-    console.log(recipeFormInput);
-    console.log(ingredients);
-    console.log(steps);
     const {
       image,
       recipeTitle,
@@ -134,7 +137,6 @@ function Profile() {
       variables: { recipeData },
     });
 
-    console.log(data.createRecipe);
     window.location.assign("/profile");
   };
 
@@ -147,6 +149,12 @@ function Profile() {
     },
     [ingredients, steps]
   );
+
+  useEffect(() => {
+    if (!loading && getUserRecipesData) {
+      console.log(getUserRecipesData);
+    }
+  }, [loading, getUserRecipesData]);
 
   return (
     <section className="profile-section">
@@ -383,6 +391,7 @@ function Profile() {
             </button>
           </form>
         </div>
+        <ProfileRecipes recipes={getUserRecipesData?.getUserRecipes} />
       </div>
     </section>
   );

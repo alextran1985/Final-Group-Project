@@ -11,6 +11,10 @@ const resolvers = {
         user,
       };
     },
+    getUserRecipes: async (_, args, { token, user }) => {
+      const recipes = await Recipe.find({ creator: user._id });
+      return recipes;
+    },
   },
   Mutation: {
     createUser: async (

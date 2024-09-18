@@ -23,6 +23,7 @@ const typeDefs = `
 
   type Query {
     getCurrent(email: String): Auth
+    getUserRecipes: [Recipe]
   }
 
   type Mutation {

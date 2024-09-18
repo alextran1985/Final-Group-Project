@@ -1447,3 +1447,8 @@ footer .container {
   background-color: #ff6767;
   color: white;
 }
+
+.pr-recipe-card {
+  border: 2px solid black;
+  padding: 1rem;
+}
