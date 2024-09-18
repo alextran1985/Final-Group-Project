@@ -41,15 +41,6 @@ const resolvers = {
       const token = signToken(foundUser);
       return { token, user: foundUser };
     },
-    saveRecipe: async (parent, { recipeName, ingredients, image }, context) => {
-      // IF we want to PROTECT This action to only logged in users
-      if (context.user) {
-        // we want to create a new Recipe in the Database
-        const newRecipe = await Recipe.create(recipeName, ingredients, image);
-
-        return newRecipe;
-      }
-    },
     createRecipe: async (_, { recipeData }, { token, user }) => {
       if (user) {
         const recipe = await Recipe.create({

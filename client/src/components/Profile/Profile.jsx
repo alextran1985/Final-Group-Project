@@ -1,6 +1,8 @@
 import React from "react";
 import "../../index.css";
 import { useState, useRef, useEffect } from "react";
+import { useMutation } from "@apollo/client";
+import { CREATE_RECIPE } from "../../utils/mutations";
 // import ProfileRecipe from "./ProfileRecipe";s
 
 function Profile() {
@@ -12,6 +14,15 @@ function Profile() {
   const [recipeImage, setRecipeImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
+
+  const [recipeFormInput, setRecipeFormInput] = useState({
+    recipeHour: "00",
+    recipeMinute: "00",
+    recipeDollar: "00",
+    recipeCent: "00",
+  });
+
+  const [createRecipe, { error }] = useMutation(CREATE_RECIPE);
 
   const handleNewRecipeBtnClick = function () {
     if (!isRecipeFormVisible) {
@@ -46,7 +57,7 @@ function Profile() {
   const handleStepChange = function (index, value) {
     const newSteps = [...steps];
     newSteps[index] = value;
-    setIngredients(newSteps);
+    setSteps(newSteps);
   };
 
   const handleDeleteStep = function (index) {
@@ -78,6 +89,53 @@ function Profile() {
       const scrollHeight = recipeFormRef.current.scrollHeight;
       setRecipeFormHeight(`${scrollHeight}px`);
     }
+  };
+
+  const handleImageChange = function (event) {
+    setRecipeFormInput({
+      ...recipeFormInput,
+      image: event.target.files[0].name,
+    });
+  };
+
+  const handleBasicRecipeInputChange = function (event) {
+    const { name, value } = event.target;
+    setRecipeFormInput({
+      ...recipeFormInput,
+      [name]: value,
+    });
+  };
+
+  const handleCreateRecipe = async function (event) {
+    event.preventDefault();
+    console.log(recipeFormInput);
+    console.log(ingredients);
+    console.log(steps);
+    const {
+      image,
+      recipeTitle,
+      recipeDescription,
+      recipeHour,
+      recipeMinute,
+      recipeDollar,
+      recipeCent,
+    } = recipeFormInput;
+    const recipeData = {
+      image: image,
+      title: recipeTitle,
+      description: recipeDescription,
+      duration: `${recipeHour} hrs ${recipeMinute} min`,
+      cost: `$${recipeDollar}.${recipeCent}`,
+      ingredients: [...ingredients],
+      directions: [...steps],
+    };
+
+    const { data } = await createRecipe({
+      variables: { recipeData },
+    });
+
+    console.log(data.createRecipe);
+    window.location.assign("/profile");
   };
 
   useEffect(
@@ -125,7 +183,10 @@ function Profile() {
                 id="recipeImage"
                 accept="image/*"
                 className="recipe-image-upload recipe-form-input"
-                onChange={handleImageUpload}
+                onChange={(event) => {
+                  handleImageUpload(event);
+                  handleImageChange(event);
+                }}
               />
 
               {/* Display Image Preview */}
@@ -158,6 +219,7 @@ function Profile() {
               name="recipeTitle"
               className="recipe-title recipe-form-input"
               placeholder="Title"
+              onChange={handleBasicRecipeInputChange}
             />
 
             {/* Recipe Description */}
@@ -166,6 +228,7 @@ function Profile() {
               rows="3"
               className="recipe-description recipe-form-input"
               placeholder="Description"
+              onChange={handleBasicRecipeInputChange}
             ></textarea>
 
             {/* Recipe Duration */}
@@ -184,6 +247,7 @@ function Profile() {
                     id="recipe-hour-input"
                     className="recipe-hour-input recipe-form-input"
                     placeholder="00"
+                    onChange={handleBasicRecipeInputChange}
                   />
                 </div>
                 <div className="minute-area">
@@ -193,6 +257,7 @@ function Profile() {
                     id="recipe-minute-input"
                     className="recipe-minute-input recipe-form-input"
                     placeholder="00"
+                    onChange={handleBasicRecipeInputChange}
                   />
                 </div>
               </div>
@@ -214,6 +279,7 @@ function Profile() {
                     id="recipe-dollar-input"
                     className="recipe-dollar-input recipe-form-input"
                     placeholder="00"
+                    onChange={handleBasicRecipeInputChange}
                   />
                 </div>
                 <div className="cent-area">
@@ -223,6 +289,7 @@ function Profile() {
                     id="recipe-cent-input"
                     className="recipe-cent-input recipe-form-input"
                     placeholder="00"
+                    onChange={handleBasicRecipeInputChange}
                   />
                 </div>
               </div>
@@ -242,12 +309,14 @@ function Profile() {
                     <input
                       type="text"
                       name={`recipeIngredient${index + 1}`}
+                      id="recipe-ingredient"
                       className="recipe-ingredient recipe-form-input"
                       placeholder={`Ingredient ${index + 1}`}
                       value={ingredient}
-                      onChange={(e) =>
-                        handleIngredientChange(index, e.target.value)
-                      }
+                      onChange={(e) => {
+                        handleIngredientChange(index, e.target.value);
+                        handleBasicRecipeInputChange(e);
+                      }}
                     />
                     <i
                       className="fa-solid fa-trash-can trash-icon"
@@ -283,7 +352,10 @@ function Profile() {
                       className="recipe-direction recipe-form-input"
                       placeholder={`Step ${index + 1}`}
                       value={step}
-                      onChange={(e) => handleStepChange(index, e.target.value)}
+                      onChange={(e) => {
+                        handleStepChange(index, e.target.value);
+                        handleBasicRecipeInputChange(e);
+                      }}
                     />
                     <i
                       className="fa-solid fa-trash-can trash-icon"
@@ -302,7 +374,11 @@ function Profile() {
             </div>
 
             {/* Create Recipe Button */}
-            <button type="submit" className="create-recipe-btn">
+            <button
+              type="submit"
+              className="create-recipe-btn"
+              onClick={handleCreateRecipe}
+            >
               Create Recipe
             </button>
           </form>

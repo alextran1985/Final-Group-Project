@@ -44,3 +44,22 @@ export const SAVE_RECIPE = gql`
     }
   }
 `;
+
+export const CREATE_RECIPE = gql`
+  mutation createRecipe($recipeData: RecipeInput) {
+    createRecipe(recipeData: $recipeData) {
+      _id
+      title
+      description
+      duration
+      cost
+      image
+      ingredients
+      directions
+      creator {
+        _id
+        email
+      }
+    }
+  }
+`;
