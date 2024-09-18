@@ -1,7 +1,6 @@
 const typeDefs = `
   type User {
     _id: ID
-    name: String
     email: String
     password: String
     recipes: [Recipe]
@@ -14,20 +13,36 @@ const typeDefs = `
 
   type Recipe {
     _id: ID
-    recipeName: String
-    ingredients: String
+    title: String
+    description: String
+    duration: String
+    cost: String
     image: String
+    ingredients: [String]
+    directions: [String]
+    creator: User
   }
 
   type Query {
     getCurrent: User
+    getUserRecipes: [Recipe]
   }
 
   type Mutation {
-    createUser(name: String, email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Auth
+    createUser(email: String, password: String, confirmPassword: String, termsAccepted: Boolean): Auth
     updateUser(name: String, email: String, password: String, confirmPassword: String): User
-    login(name: String, email: String, password: String): Auth
+    login(email: String, password: String): Auth
     saveRecipe(recipeName: String, ingredients: String, image: String): Recipe
+    createRecipe(recipeData: RecipeInput): Recipe
+  }
+  input RecipeInput {
+    title: String
+    description: String
+    duration: String
+    cost: String
+    image: String
+    ingredients: [String]
+    directions: [String]
   }
 `;
 

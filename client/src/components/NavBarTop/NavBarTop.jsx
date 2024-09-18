@@ -11,7 +11,6 @@ const NavBarTop = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   const [registrationFormState, setRegistrationFormState] = useState({
-    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -58,6 +57,7 @@ const NavBarTop = () => {
 
   const handleLoginForm = async (event) => {
     event.preventDefault();
+    console.log(loginFormState);
     const { data } = await login({
       variables: { ...loginFormState },
     });
@@ -183,7 +183,7 @@ const NavBarTop = () => {
             <div className="form-box register">
               <h2>Registration</h2>
               <form action="#" onSubmit={handleRegistrationForm}>
-                <div className="input-box">
+                {/* <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid "></i>
                   </span>
@@ -194,7 +194,7 @@ const NavBarTop = () => {
                     required
                   />
                   <label>Name</label>
-                </div>
+                </div> */}
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-envelope"></i>

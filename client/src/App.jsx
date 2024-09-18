@@ -47,8 +47,6 @@ const App = () => {
         <NavBarTop />
         <NavBarBottom />
         <Outlet />
-        {/* <Header />   */}
-        <Main />
         <Footer />
       </div>
     </ApolloProvider>

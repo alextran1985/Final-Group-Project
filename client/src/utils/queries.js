@@ -47,3 +47,22 @@ export const GetRecipe_byId = gql`
     }
   }
 `;
+
+export const GET_USER_RECIPES = gql`
+  query getUserRecipes {
+    getUserRecipes {
+      _id
+      title
+      description
+      duration
+      cost
+      image
+      ingredients
+      directions
+      creator {
+        _id
+        email
+      }
+    }
+  }
+`;

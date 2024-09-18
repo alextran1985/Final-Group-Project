@@ -2,14 +2,12 @@ import { gql } from "@apollo/client";
 
 export const CREATE_USER = gql`
   mutation createUser(
-    $name: String
     $email: String
     $password: String
     $confirmPassword: String
     $termsAccepted: Boolean
   ) {
     createUser(
-      name: $name
       email: $email
       password: $password
       confirmPassword: $confirmPassword
@@ -49,14 +47,12 @@ export const EDIT_USER = gql`
 `;
 
 export const USER_LOGIN = gql`
-  mutation login($name: String, $email: String, $password: String) {
-    login(name: $name, email: $email, password: $password) {
+  mutation login($email: String, $password: String) {
+    login(email: $email, password: $password) {
       token
       user {
         _id
-        name
         email
-        saveRecipe
       }
     }
   }
@@ -69,6 +65,25 @@ export const SAVE_RECIPE = gql`
       recipeName
       ingredients
       image
+    }
+  }
+`;
+
+export const CREATE_RECIPE = gql`
+  mutation createRecipe($recipeData: RecipeInput) {
+    createRecipe(recipeData: $recipeData) {
+      _id
+      title
+      description
+      duration
+      cost
+      image
+      ingredients
+      directions
+      creator {
+        _id
+        email
+      }
     }
   }
 `;
