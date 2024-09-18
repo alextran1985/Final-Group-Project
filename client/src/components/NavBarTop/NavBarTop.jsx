@@ -11,7 +11,7 @@ const NavBarTop = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   const [registrationFormState, setRegistrationFormState] = useState({
-    name:"",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -49,7 +49,7 @@ const NavBarTop = () => {
 
   const handleRegistrationForm = async (event) => {
     event.preventDefault();
-    console.log("Sending Data to Server...")
+    console.log("Sending Data to Server...");
     const { data } = await createUser({
       variables: { ...registrationFormState, termsAccepted },
     });
@@ -119,8 +119,8 @@ const NavBarTop = () => {
           {Auth.loggedIn() ? (
             <button onClick={logout}>Logout</button>
           ) : (
-            <a href="#" class="srbtn btnLogin-popup" onClick={openModal}>
-              Login | Register <i class="fa-solid fa-right-to-bracket"></i>
+            <a href="#" className="srbtn btnLogin-popup" onClick={openModal}>
+              Login | Register <i className="fa-solid fa-right-to-bracket"></i>
             </a>
           )}
         </div>
@@ -136,7 +136,6 @@ const NavBarTop = () => {
             <div className="form-box login">
               <h2>Login</h2>
               <form action="#" onSubmit={handleLoginForm}>
-              
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-envelope"></i>
@@ -184,7 +183,7 @@ const NavBarTop = () => {
             <div className="form-box register">
               <h2>Registration</h2>
               <form action="#" onSubmit={handleRegistrationForm}>
-              <div className="input-box">
+                <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid "></i>
                   </span>

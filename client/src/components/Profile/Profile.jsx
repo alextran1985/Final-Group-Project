@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NewRecipe from "../../pages/NewRecipe";
-import RecipesComponent from "../../pages/RecipesComponent";
 
 import { QUERY_CURRENT_USER } from "../../utils/queries";
 import { EDIT_USER } from ".././../utils/mutations";
@@ -17,8 +16,6 @@ import {
   MDBBtn,
   MDBBreadcrumb,
   MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
   MDBIcon,
   MDBListGroup,
   MDBListGroupItem,
@@ -38,11 +35,11 @@ export default function Profile() {
   const { loading, data } = useQuery(QUERY_CURRENT_USER);
   const [updateUser, { error }] = useMutation(EDIT_USER);
 
-  console.log("Loading... ", loading);
-  console.log("Fetched Data: ", data);
-  console.log("Error: ", error);
+  // console.log("Loading... ", loading);
+  // console.log("Fetched Data: ", data);
+  // console.log("Error: ", error);
   const user = data?.getCurrent;
-  console.log("User: ", user);
+  // console.log("User: ", user);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -64,8 +61,10 @@ export default function Profile() {
     event.preventDefault();
     console.log("Sending Data to Server...");
     const { data } = await updateUser({
+      
       variables: { ...editFormState },
     });
+    console.log(updateUser);
   };
 
   return (
@@ -109,7 +108,7 @@ export default function Profile() {
 
             <MDBCard className="mb-4 mb-lg-0">
               <MDBCardBody className="p-0">
-                <MDBListGroup flush className="rounded-3">
+                <MDBListGroup flush="true" className="rounded-3">
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
                     <MDBIcon
                       fab

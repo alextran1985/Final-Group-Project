@@ -1,8 +1,6 @@
 import React from "react";
 import NavBarTop from "./components/NavBarTop/NavBarTop";
 import NavBarBottom from "./components/NavBarBottom/NavBarBottom";
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import RecipesComponent from "./pages/RecipesComponent";
 import { createBrowserRouter, RouterProvider, Route, Routes } from "react-router-dom";
@@ -43,8 +41,6 @@ const App = () => {
         <NavBarTop />
         <NavBarBottom />
         <Outlet />
-        <Header />
-        <Main />
         <Footer />
       </div>
     </ApolloProvider>

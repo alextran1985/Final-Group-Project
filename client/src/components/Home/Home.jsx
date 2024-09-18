@@ -1,5 +1,7 @@
 import React from "react";
 // import './Main.css';
+import Header from "../Header/Header";
+import Main from "../Main/Main";
 
 const Home = () => {
   const featuredRecipes = [
@@ -113,6 +115,8 @@ const Home = () => {
 
   return (
     <div>
+      <Header />
+      <Main />
       <section className="featuredrecipe container flex">
         <div className="featuredtitles flex">
           <div className="titleicon">

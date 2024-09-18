@@ -37,6 +37,7 @@ export const EDIT_USER = gql`
       password: $password
       confirmPassword: $confirmPassword
     ) {
+      token
       user {
         _id
         name
@@ -48,7 +49,7 @@ export const EDIT_USER = gql`
 `;
 
 export const USER_LOGIN = gql`
-  mutation login($name: String $email: String, $password: String) {
+  mutation login($name: String, $email: String, $password: String) {
     login(name: $name, email: $email, password: $password) {
       token
       user {
