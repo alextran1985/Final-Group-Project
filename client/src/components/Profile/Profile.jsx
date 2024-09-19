@@ -235,7 +235,7 @@ export default function Profile() {
           </MDBCol>
         </MDBRow>
 
-        <MDBRow>
+        <MDBRow className="fix">
           <MDBCol lg="4">
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
@@ -299,9 +299,7 @@ export default function Profile() {
           {/* Where you can create new recipe form is going to be */}
           <MDBCol lg="8">
             <MDBCard className="mb-4">
-              <MDBCardBody>
-                <NewRecipe />
-              </MDBCardBody>
+              <MDBCardBody>{/* <NewRecipe /> */}</MDBCardBody>
             </MDBCard>
 
             <MDBRow>
@@ -327,7 +325,7 @@ export default function Profile() {
                   </MDBRipple>
                   <MDBCardBody>
                     <MDBCardTitle>{}Recipe Name</MDBCardTitle>
-                    <MDBCardText>Description of recipe goe here</MDBCardText>
+                    <MDBCardText>Description of recipe goes here</MDBCardText>
                     <MDBBtn href="#">New Recipe</MDBBtn>
                   </MDBCardBody>
                 </MDBCard>
