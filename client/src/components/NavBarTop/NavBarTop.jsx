@@ -48,6 +48,7 @@ const NavBarTop = () => {
 
   const handleRegistrationForm = async (event) => {
     event.preventDefault();
+    console.log("Sending Data to Server...");
     const { data } = await createUser({
       variables: { ...registrationFormState, termsAccepted },
     });
@@ -56,6 +57,7 @@ const NavBarTop = () => {
 
   const handleLoginForm = async (event) => {
     event.preventDefault();
+    console.log(loginFormState);
     const { data } = await login({
       variables: { ...loginFormState },
     });
@@ -117,8 +119,8 @@ const NavBarTop = () => {
           {Auth.loggedIn() ? (
             <button onClick={logout}>Logout</button>
           ) : (
-            <a href="#" class="srbtn btnLogin-popup" onClick={openModal}>
-              Login | Register <i class="fa-solid fa-right-to-bracket"></i>
+            <a href="#" className="srbtn btnLogin-popup" onClick={openModal}>
+              Login | Register <i className="fa-solid fa-right-to-bracket"></i>
             </a>
           )}
         </div>
@@ -181,6 +183,18 @@ const NavBarTop = () => {
             <div className="form-box register">
               <h2>Registration</h2>
               <form action="#" onSubmit={handleRegistrationForm}>
+                {/* <div className="input-box">
+                  <span className="icon">
+                    <i className="fa-solid "></i>
+                  </span>
+                  <input
+                    type="text"
+                    name="name"
+                    onChange={handleRegistrationChange}
+                    required
+                  />
+                  <label>Name</label>
+                </div> */}
                 <div className="input-box">
                   <span className="icon">
                     <i className="fa-solid fa-envelope"></i>
