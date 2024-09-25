@@ -125,7 +125,7 @@ const Main = () => {
             Let's make cooking fun and approachable for all!
           </p>
         </div>
-        <div className="featuredcards flex">
+        <div className="featuredcards">
           {featuredRecipes.map((recipe, index) => (
             <div className="fcard" key={index}>
               <div className="fcardimg">
@@ -153,7 +153,7 @@ const Main = () => {
         </div>
       </section>
 
-      <section className="threecards container flex">
+      <section className="threecards container">
         {threeCards.map((card, index) => (
           <div className="tcard" key={index}>
             <div className="tcardimg">
@@ -185,7 +185,7 @@ const Main = () => {
       </section>
 
       <section className="gfbg">
-        <div className="container flex">
+        <div className="container">
           <div className="greenworld flex">
             <img src={worlds[0].image} alt={worlds[0].title} />
             <div className="gfinfo">

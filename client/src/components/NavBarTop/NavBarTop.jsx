@@ -78,7 +78,7 @@ const NavBarTop = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="topnav flex">
         <div className="container flex">
           <div className="navicons flex">
@@ -259,7 +259,7 @@ const NavBarTop = () => {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

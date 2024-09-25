@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import NavBarTop from "./components/NavBarTop/NavBarTop";
 import NavBarBottom from "./components/NavBarBottom/NavBarBottom";
 import Footer from "./components/Footer/Footer";
@@ -41,14 +41,24 @@ const client = new ApolloClient({
 });
 
 const App = () => {
+  const [topPadding, setTopPadding] = useState(0);
+  const fullNavbarRef = useRef(null);
+
+  useEffect(function () {
+    const fullNavbarHeight = fullNavbarRef.current.scrollHeight;
+    setTopPadding(fullNavbarHeight);
+  }, []);
+
   return (
     <ApolloProvider client={client}>
-      <div>
+      <div className="full-navbar" ref={fullNavbarRef}>
         <NavBarTop />
         <NavBarBottom />
-        <Outlet />
-        <Footer />
       </div>
+      <div style={{ paddingTop: `${topPadding}px` }}>
+        <Outlet />
+      </div>
+      <Footer />
     </ApolloProvider>
   );
 };

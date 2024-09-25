@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Auth from "../../utils/auth";
 
@@ -6,6 +6,12 @@ const NavBarBottom = () => {
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [isNavOpen, setNavOpen] = useState(false);
   const [randomRecipe, setRandomRecipe] = useState(1);
+
+  const [isNavlistVisible, setIsNavlistVisible] = useState(false);
+  const [navlistMaxHeight, setNavlistMaxHeight] = useState("0px");
+  const navlistRef = useRef(null);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 992);
 
   useEffect(() => {
     const randomRecipeId = Math.floor(Math.random() * 11) + 1;
@@ -29,10 +35,30 @@ const NavBarBottom = () => {
     };
   }, []);
 
+  useEffect(() => {});
+
   const toggleSearch = () => {
     setSearchVisible(!isSearchVisible);
   };
+
+  const handleBurgerClick = function (event) {
+    if (!isNavlistVisible) {
+      const scrollHeight = navlistRef.current.scrollHeight;
+      setNavlistMaxHeight(`${scrollHeight}px`);
+      setIsNavlistVisible(!isNavlistVisible);
+    } else {
+      setNavlistMaxHeight("0px");
+      setIsNavlistVisible(!isNavlistVisible);
+    }
+  };
+
+  const handleNavlistLinkClick = function (event) {
+    setNavlistMaxHeight("0px");
+    setIsNavlistVisible(!isNavlistVisible);
+  };
+
   console.log(randomRecipe);
+
   return (
     <nav className="mainnav">
       <div className="container flex">
@@ -40,29 +66,51 @@ const NavBarBottom = () => {
           <img src="../../src/assets/logo.png" alt="Logo" />
           <h1>The Cooking Pot</h1>
         </div>
+        <i
+          className="fa-solid fa-burger burger"
+          onClick={handleBurgerClick}
+        ></i>
         <ul
-          className="navlist flex"
-          style={{ right: isNavOpen ? "0" : "-100%" }}
+          ref={navlistRef}
+          className="navlist"
+          style={{ maxHeight: navlistMaxHeight }}
         >
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={handleNavlistLinkClick}>
+              <i className="fa-solid fa-house navlist-icon"></i>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={`/recipes/${randomRecipe}`}>Recipes</Link>
+            <Link
+              to={`/recipes/${randomRecipe}`}
+              onClick={handleNavlistLinkClick}
+            >
+              <i className="fa-solid fa-book navlist-icon"></i>
+              Recipes
+            </Link>
           </li>
           {Auth.loggedIn() && (
             <li>
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile" onClick={handleNavlistLinkClick}>
+                Profile
+              </Link>
             </li>
           )}
           <li>
-            <a href="/">Videos</a>
+            <a href="/" onClick={handleNavlistLinkClick}>
+              <i className="fa-solid fa-video navlist-icon"></i>
+              Videos
+            </a>
           </li>
           <li>
-            <a href="/">Help</a>
+            <a href="/" onClick={handleNavlistLinkClick}>
+              <i className="fa-solid fa-circle-question navlist-icon"></i>
+              Help
+            </a>
           </li>
         </ul>
-        <div className="searchbar flex">
+        {/* <div className="searchbar flex">
           <input type="checkbox" name="check-toggle" id="checkbox" hidden />
           <i
             className="fa-solid fa-magnifying-glass"
@@ -80,7 +128,7 @@ const NavBarBottom = () => {
               onClick={toggleSearch}
             ></i>
           </div>
-        )}
+        )} */}
       </div>
     </nav>
   );
