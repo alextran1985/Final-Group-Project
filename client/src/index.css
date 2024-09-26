@@ -108,6 +108,11 @@ header {
   color: #e74c3c;
 }
 
+.logout-btn {
+  background-color: white;
+  color: black;
+}
+
 .srbtn {
   font-size: 13px;
   font-weight: 600;

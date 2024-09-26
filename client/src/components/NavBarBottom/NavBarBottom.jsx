@@ -93,6 +93,7 @@ const NavBarBottom = () => {
           {Auth.loggedIn() && (
             <li>
               <Link to="/profile" onClick={handleNavlistLinkClick}>
+                <i className="fa-solid fa-user navlist-icon"></i>
                 Profile
               </Link>
             </li>

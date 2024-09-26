@@ -84,10 +84,11 @@
   .footer {
     display: flex;
     width: 100%;
+    justify-content: center;
   }
 
   .footernav-area {
-    width: 500px;
+    width: 450px;
   }
 
   .footerlogo h1,

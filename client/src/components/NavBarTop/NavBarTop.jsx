@@ -117,7 +117,9 @@ const NavBarTop = () => {
           </div>
 
           {Auth.loggedIn() ? (
-            <button onClick={logout}>Logout</button>
+            <button className="logout-btn" onClick={logout}>
+              Logout
+            </button>
           ) : (
             <a href="#" className="srbtn btnLogin-popup" onClick={openModal}>
               Login | Register <i className="fa-solid fa-right-to-bracket"></i>
