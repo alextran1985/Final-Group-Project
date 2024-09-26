@@ -24,6 +24,8 @@
 .container {
   max-width: 1100px;
   margin: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .fix {
@@ -65,20 +67,33 @@ header {
   z-index: 99999;
 }
 
-.topnav {
+#root {
+  overflow: hidden;
+}
+
+.full-navbar {
+  position: fixed;
+  z-index: 1000;
+  background-color: white;
   width: 100%;
-  height: 50px;
+}
+
+.topnav {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   background-color: #1d2228;
   color: #fff;
+  /* width: 100%;
+  height: 50px;
   position: fixed;
   top: 0;
-  z-index: 99999;
+  z-index: 99999; */
 }
 
 .topnav .container {
-  width: 100%;
-  height: 100%;
   justify-content: space-between;
+  /* width: 100%;
+  height: 100%; */
 }
 
 .navicons {
@@ -91,6 +106,11 @@ header {
 
 .navicons a:hover i {
   color: #e74c3c;
+}
+
+.logout-btn {
+  background-color: white;
+  color: black;
 }
 
 .srbtn {
@@ -114,22 +134,24 @@ header {
 }
 
 .mainnav {
-  width: 100%;
+  padding-top: 0.6rem;
+  padding-bottom: 1rem;
+  /* width: 100%;
   height: 90px;
   position: fixed;
   top: 50px;
   background-color: #fff;
   box-shadow: 0 0 5px #999;
   z-index: 9999;
-  transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out; */
 }
 
 .mainnav .container {
-  position: relative;
+  justify-content: space-between;
+  /* position: relative;
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  justify-content: space-between;
+  background-color: transparent; */
 }
 
 .logo {
@@ -137,17 +159,17 @@ header {
 }
 
 .logo img {
-  width: 50px;
-  margin-right: 5px;
+  width: 40px;
 }
 
 .logo h1 {
-  font-size: 28px;
+  font-size: 24px;
   font-family: "Sofia", cursive;
   font-weight: 800;
   color: #1d2228;
   cursor: pointer;
   transition: 0.2s ease;
+  margin: 10px 0 0 1rem;
 }
 
 .logo:hover h1,
@@ -155,20 +177,44 @@ header {
   color: var(--main-color);
 }
 
+.burger {
+  font-size: 1.8rem;
+  margin: 10px 0 0 0;
+  color: black;
+  cursor: pointer;
+}
+
 .navlist {
-  gap: 30px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0 1rem;
+  background-color: black;
+  color: white;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 250ms;
+  /* display: none; */
+  /* gap: 30px;
   margin-right: 150px;
-  transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out; */
+}
+
+.navlist-icon {
+  margin-right: 0.8rem;
 }
 
 .navlist li a {
-  font-size: 14px;
+  font-size: 1.2rem;
   font-weight: 600;
+  display: block;
+  padding: 1.2rem 0;
 }
 
 .navlist li a:hover {
-  color: var(--main-color);
-  border-bottom: 1px solid var(--main-color);
+  color: #e74c3c;
 }
 
 .searchbar {
@@ -409,7 +455,6 @@ header {
   background: url("./assets/slide-1.jpg") no-repeat center center/cover;
   z-index: 1;
   transition: 0.3s ease;
-  padding-top: 120px;
 }
 
 .headerimg .container {
@@ -436,12 +481,12 @@ header {
   gap: 25px;
   z-index: 9;
   color: #fff;
-  padding-top: 8rem;
+  padding-top: 6rem;
   padding-bottom: 13rem;
 }
 
 .headertitle {
-  font-size: 70px;
+  font-size: 3.5rem;
   color: #fff;
   font-weight: 600;
   font-family: fangsong;
@@ -449,8 +494,8 @@ header {
 
 .headerpera {
   font-size: 17px;
-  padding-right: 35rem;
   color: #ffffffcd;
+  max-width: 600px;
 }
 
 .headerbtn {
@@ -548,7 +593,7 @@ header {
 
 .sliderlfbtn button {
   position: relative;
-  padding: 15px;
+  padding: 15px 20px;
   border: 2px solid #fff;
   background: transparent;
   outline: none;
@@ -624,6 +669,7 @@ header {
   color: #333;
   font-family: var(--font-family);
   margin-top: 8px;
+  font-size: 1.4rem;
 }
 
 main {
@@ -634,17 +680,19 @@ main {
 .threecards {
   gap: 25px;
   padding: 0 20px;
-  margin-top: 6rem;
+  margin-top: 3rem;
 }
 
 .tcard {
   position: relative;
-  width: 350px;
+  max-width: 350px;
   height: auto;
   overflow: hidden;
   box-shadow: 0 0 10px #ede9e9;
   border-radius: 8px;
   padding: 20px;
+  margin: 0 auto 5rem auto;
+  width: 350px;
 }
 
 .tcardimg {
@@ -886,6 +934,7 @@ main {
 .featuredtitles h1 {
   font-family: "Playfair Display", serif;
   font-size: 45px;
+  text-align: center;
   color: #1d2228;
 }
 
@@ -906,10 +955,11 @@ main {
 
 .fcard {
   position: relative;
-  width: 350px;
+  max-width: 350px;
   height: auto;
   overflow: hidden;
   border-radius: 10px;
+  margin: 0 auto 5rem auto;
 }
 
 .fcardimg {
@@ -1045,7 +1095,7 @@ main {
   position: relative;
   background: url("./assets/gfbg.jpg") no-repeat center center/cover;
   width: 100%;
-  height: 45vh;
+  padding: 1rem 0;
   margin-top: 8rem;
 }
 
@@ -1076,7 +1126,7 @@ main {
 .greenworld,
 .fruitworld {
   position: relative;
-  width: 48%;
+  max-width: 500px;
   height: 70%;
   background-color: #fff;
   border-radius: 10px;
@@ -1085,17 +1135,28 @@ main {
   padding: 28px;
 }
 
+.greenworld {
+  margin-bottom: 2rem;
+}
+
+.greenworld,
+.fruitworld {
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .greenworld img,
 .fruitworld img {
-  width: 240px;
+  width: 175px;
   position: absolute;
-  right: -50px;
-  bottom: 0;
+  right: -40px;
+  bottom: 20px;
 }
 
 .fruitworld img {
   width: 320px;
   right: -120px;
+  bottom: 0;
 }
 
 .gfinfo {
@@ -1187,6 +1248,7 @@ footer {
 }
 
 .footer {
+  margin: auto;
   padding: 6rem 0;
   gap: 30px;
   align-items: flex-start;
@@ -1199,24 +1261,21 @@ footer .container {
 }
 
 .footerlogo {
-  width: 36%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  gap: 20px;
+  max-width: 525px;
 }
 
 .footernav {
-  width: 13%;
-  margin-right: 20px;
+  margin-bottom: 2rem;
 }
 
-.footernav:last-child {
-  margin-right: 0;
-}
-
-.footerlogo {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-right: 5.4rem;
+.footerlogo h1,
+.footerlogo p {
+  text-align: center;
 }
 
 .footerlogo h1 {
@@ -1231,6 +1290,7 @@ footer .container {
 
 .fsocial {
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -1251,6 +1311,7 @@ footer .container {
 .footernav h3 {
   font-size: 22px;
   margin-bottom: 30px;
+  text-align: center;
   font-family: var(--font-family);
 }
 
@@ -1258,11 +1319,18 @@ footer .container {
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
+  padding: 0;
+}
+
+.footernav ul li {
+  width: 100%;
 }
 
 .footernav ul li a {
   font-size: 13px;
   font-weight: 500;
+  display: block;
+  text-align: center;
   transition: 0.3s ease;
 }
 

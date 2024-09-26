@@ -114,10 +114,10 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <Main />
-    </div>
+    </>
   );
 };
 

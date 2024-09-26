@@ -1,0 +1,106 @@
+@media screen and (min-width: 768px) {
+  /* Global */
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  /* Navigation */
+  .navlist {
+    padding: 0 3rem;
+  }
+
+  /* Footer */
+  .footernav-area {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  /* Navigation */
+  .mainnav {
+    padding: 1rem 0;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .navlist {
+    max-height: initial !important;
+    position: relative;
+    background-color: transparent;
+    color: black;
+    display: flex;
+    justify-content: center;
+    width: initial;
+  }
+
+  .navlist li a {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Header */
+  .headerpera {
+    font-size: 1.6rem;
+  }
+
+  /* Featured Cards */
+  .featuredcards {
+    display: flex;
+  }
+
+  .fcard {
+    margin-bottom: 2rem;
+  }
+
+  /* Threecards */
+  .threecards {
+    display: flex;
+  }
+
+  .tcard {
+    margin-bottom: 0rem;
+  }
+
+  /* gfbg */
+  .gfbg {
+    padding: 3rem 0;
+  }
+
+  .gfbg .container {
+    display: flex;
+  }
+
+  .greenworld,
+  .fruitworld {
+    margin: 0;
+    width: 45%;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footernav-area {
+    width: 450px;
+  }
+
+  .footerlogo h1,
+  .footerlogo p {
+    text-align: left;
+  }
+
+  .footerlogo p {
+    max-width: 400px;
+  }
+
+  .fsocial {
+    justify-content: start;
+  }
+}
